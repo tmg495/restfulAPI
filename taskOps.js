@@ -62,10 +62,22 @@ const deleteTask = function(id) {
     return index
 }
 
+const catchBadData = function(body) {
+    let errorText = ''
+    if (typeof(body.title) != 'string') {
+        errorText += `Title must be a string (type: ${typeof(body.title)}) \n`
+    }
+    if (typeof(body.completed) != 'boolean') {
+        errorText += `Task status must be boolean (type: ${typeof(body.completed)})`
+    }
+    return errorText
+}
+
 module.exports = {
     getTasks,
     addTask,
     taskById,
     updateTask,
-    deleteTask
+    deleteTask,
+    catchBadData
 }

@@ -29,6 +29,10 @@ app.get('/tasks/:id', (req, res) => {
 })
 
 app.put('/tasks/:id', (req, res) => {
+    const err = taskOps.catchBadData(req.body)
+    if (err != '') {
+        res.status(400).send(err)
+    }
     const updatedTask = taskOps.updateTask(req.body, req.params.id)
     if (updatedTask == undefined) {
         res.status(404).send(`Task ID ${req.params.id} not found`)
