@@ -16,7 +16,7 @@ app.get('/tasks', (req, res) => {
 
 app.post('/tasks', (req, res) => {
     const newTask = taskOps.addTask(req.body)
-    res.status(201).send(newTask)
+    res.status(201).json(newTask)
 })
 
 app.get('/tasks/:id', (req, res) => {
@@ -37,7 +37,7 @@ app.put('/tasks/:id', (req, res) => {
     if (updatedTask == undefined) {
         res.status(404).send(`Task ID ${req.params.id} not found`)
     } else {
-        res.send(updatedTask)
+        res.json(updatedTask)
     }
 })
 
